@@ -32,6 +32,15 @@ build-publish:
 
 The caller job must grant `packages: write`.
 
+## pre-commit
+
+Runs `pre-commit` against the caller repo. Optional input `python-version` (default `3.14`).
+
+```yaml
+pre-commit:
+  uses: debugger24/gh-actions/.github/workflows/pre-commit.yaml@v1
+```
+
 ## helm-check
 
 Installs Helm and kubeconform, then runs `make helm-check` in the caller repo
