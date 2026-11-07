@@ -1,0 +1,28 @@
+name: Helm Check
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  helm-check:
+    name: Helm Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v5
+        with:
+          version: "v4.3.1" # pinned: the unpinned fallback is Helm 3, which breaks the 2020-12 schema
+
+      - name: Install kubeconform
+        run: |
+          curl -sSL https://github.com/yannh/kubeconform/releases/download/v0.8.0/kubeconform-linux-amd64.tar.gz \
+            | sudo tar xz -C /usr/local/bin kubeconform
+
+      - name: Helm checks
+        run: make helm-check

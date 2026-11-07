@@ -31,3 +31,13 @@ build-publish:
 ```
 
 The caller job must grant `packages: write`.
+
+## helm-check
+
+Installs Helm and kubeconform, then runs `make helm-check` in the caller repo
+(the caller's Makefile defines what is linted and validated).
+
+```yaml
+helm-validation:
+  uses: debugger24/gh-actions/.github/workflows/helm-check.yaml@v1
+```
